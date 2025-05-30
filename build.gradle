@@ -1,0 +1,14 @@
+plugins {
+    id 'com.gtnewhorizons.gtnhconvention'
+}
+String gitVersionEnabled = project.properties['gtnh.modules.gitVersion'] == null ? "true" : project.properties['gtnh.modules.gitVersion']
+boolean gitOffMyBack = gitVersionEnabled.toBoolean()
+println ("gtnh.modules.gitVersion:" + gitOffMyBack)
+if (!gitOffMyBack && !modVersion.isEmpty())
+    version=modVersion
+minecraft{
+    injectedTags.put("MODID",project.modId)
+    injectedTags.put("MODNAME",project.modName)
+    injectedTags.put("MODGROUP",project.modGroup)
+    injectedTags.put("MINECRAFT_VERSION",project.minecraftVersion)
+}
