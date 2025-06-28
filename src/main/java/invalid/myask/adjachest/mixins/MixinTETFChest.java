@@ -18,13 +18,17 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
 @Mixin(TileEntityTFChest.class)
 public abstract class MixinTETFChest extends MixinTileEntityChest {
     @Shadow
-    private boolean func_145977_a(int x, int y, int z) {return false;};
+    private boolean func_145977_a(int x, int y, int z) {return false;}
 
     @Override
     protected boolean aValidDouble(int x, int y, int z) {
         return func_145977_a(x, y, z);
     }
 
+    /**
+     * @reason see called method--same reason: use new logic instead of old (meta-mutating, adjacent-double-asssuming) logic.
+     * @author Myask
+     */
     @Overwrite
     public void checkForAdjacentChests() {
         ((IAdjChest)this).adjachest$checkForAdjacentChests();

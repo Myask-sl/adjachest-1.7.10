@@ -30,9 +30,7 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
 public abstract class MixinTileEntityChest extends TileEntity implements IFacingChest, IAdjChest {
 
     @Shadow
-    private boolean func_145977_a(int x, int y, int z) {
-        return false;
-    };
+    private boolean func_145977_a(int x, int y, int z) {return false;}
 
     protected boolean aValidDouble(int x, int y, int z) {
         return func_145977_a(x, y, z);
@@ -50,16 +48,20 @@ public abstract class MixinTileEntityChest extends TileEntity implements IFacing
     public TileEntityChest adjacentChestZPos;
 
     @Shadow
-    private void func_145978_a(TileEntityChest chest, int dirIndex) {}; //make adjacent recheck
+    private void func_145978_a(TileEntityChest chest, int dirIndex) {} //make adjacent recheck
 
     @Shadow
-    public abstract int func_145980_j() ;
+    public abstract int func_145980_j();
 
     @Unique
     public ForgeDirection adjachest$doubleDirection = UNKNOWN;
     @Unique
     boolean adjachest$finishedLoading = false;
 
+    /**
+     * @reason Original mutates metas all over the place, and won't work with multiple adjacencies.
+     * @author Myask
+     */
     @Overwrite
     public void checkForAdjacentChests() {
         adjachest$checkForAdjacentChests();
